@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <math.h>
+
+typedef struct {
+    float x, y, z;
+} Ponto;
+
+float distancia(Ponto a, Ponto b) {
+    return sqrt(
+        (a.x - b.x)*(a.x - b.x) +
+        (a.y - b.y)*(a.y - b.y) +
+        (a.z - b.z)*(a.z - b.z)
+    );
+}
+
+int main() {
+    int n;
+
+    scanf("%d", &n);
+
+    Ponto p[n];
+
+    for (int i = 0; i < n; i++) {
+        scanf("%f %f %f", &p[i].x, &p[i].y, &p[i].z);
+    }
+
+    float menor = distancia(p[0], p[1]);
+
+    for (int i = 0; i < n; i++) {
+        for (int j = i + 1; j < n; j++) {
+            float d = distancia(p[i], p[j]);
+            if (d < menor) {
+                menor = d;
+            }
+        }
+    }
+
+    printf("Menor distancia: %.2f\n", menor);
+
+    return 0;
+}
